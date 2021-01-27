@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:news/models/ArticleModel.dart';
 import 'package:news/modules/details_screen/DetailsScreen.dart';
 import 'package:news/modules/head_lines_screen/HeadLinesCubit/HeadLinesCubit.dart';
 import 'package:news/modules/single_category/single_category.dart';

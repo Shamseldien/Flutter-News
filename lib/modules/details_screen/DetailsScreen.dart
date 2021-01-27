@@ -2,8 +2,7 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:news/models/ArticleModel.dart';
+
 import 'package:news/modules/details_screen/bloc/details_cubit.dart';
 import 'package:news/modules/details_screen/bloc/details_states.dart';
 import 'package:webview_flutter/webview_flutter.dart';

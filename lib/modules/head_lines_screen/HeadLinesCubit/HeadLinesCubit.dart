@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:news/models/ArticleModel.dart';
+
 import 'package:news/modules/head_lines_screen/HeadLinesCubit/HeadLinesState.dart';
 import 'package:news/shared/network/remote/helper.dart';
 
