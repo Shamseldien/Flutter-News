@@ -67,7 +67,10 @@ class HeadLinesScreen extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 20
+                    ),
                     child: Text('Categories',
                       style: GoogleFonts.aclonica(
                           fontSize: 18.0,
@@ -79,7 +82,7 @@ class HeadLinesScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal:15.0 ),
                     child: Container(
-                      height: MediaQuery.of(context).size.height*.21,
+                      height: 130,
                       child: ListView.builder(
                         itemBuilder: (context, index) => allCategories(
                           context: context,
