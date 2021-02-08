@@ -30,7 +30,7 @@ class HeadLinesScreen extends StatelessWidget {
         builder: (BuildContext context, state) {
           var cubit =HeadLinesCubit.get(context);
           var list = [];
-          list = cubit.articles;
+           list = cubit.articles;
           return Scaffold(
             appBar: AppBar(
               iconTheme: IconThemeData(

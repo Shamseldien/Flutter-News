@@ -8,7 +8,7 @@ class HeadLinesCubit extends Cubit<HeadLinesStates> {
   HeadLinesCubit() : super(HeadLinesInitialState());
   static HeadLinesCubit get(context) => BlocProvider.of(context);
 
-  List articles ;
+  List articles=[] ;
 
   List categoryTitle=[
     'health',

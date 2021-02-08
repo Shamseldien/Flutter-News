@@ -93,7 +93,7 @@ Widget singleCategoryItem(articles, context) => Padding(
                           borderRadius: BorderRadius.circular(5.0),
                           color: Colors.blue),
                       child: Text(
-                        HeadLinesCubit.get(context).getNewDate(articles) ?? '',
+                        HeadLinesCubit.get(context).getNewDate(articles)?? '',
                         textDirection: TextDirection.rtl,
                         style: TextStyle(
                           fontSize: 15.0,
@@ -117,76 +117,88 @@ Widget singleCategoryItem(articles, context) => Padding(
 
 Widget topNewsItems(article, context) => Padding(
       padding: const EdgeInsets.all(5.0),
-      child: Card(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-        color: Colors.white,
-        child: Container(
-          height: MediaQuery.of(context).size.height / 5,
-          width: MediaQuery.of(context).size.width * 2,
-          child: Row(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width / 3,
-                height: MediaQuery.of(context).size.height / 5,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    image: DecorationImage(
-                        image: NetworkImage(article['urlToImage'] ??
-                            'https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg'),
-                        fit: BoxFit.cover)),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          article['title'] ?? '',
-                          maxLines: 4,
-                          textDirection: TextDirection.rtl,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16.0),
+      child: GestureDetector(
+        onTap: (){
+          navigateTo(
+              context: context,
+              widget: DetailsScreen(
+                image: article['urlToImage'],
+                url: article['url'],
+                desc: article['description'],
+                author: article['source']['name'],
+              ));
+        },
+        child: Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+          color: Colors.white,
+          child: Container(
+            height: MediaQuery.of(context).size.height / 5,
+            width: MediaQuery.of(context).size.width * 2,
+            child: Row(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width / 3,
+                  height: MediaQuery.of(context).size.height / 5,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      image: DecorationImage(
+                          image: NetworkImage(article['urlToImage'] ??
+                              'https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg'),
+                          fit: BoxFit.cover)),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            article['title'] ?? '',
+                            maxLines: 4,
+                            textDirection: TextDirection.rtl,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16.0),
+                          ),
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            width: 80,
-                            padding: EdgeInsets.all(5.0),
-                            decoration: BoxDecoration(
-                                color: Colors.blue,
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: Text(
-                              article['source']['name'] ?? '',
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: Colors.white,
+                        Row(
+                          children: [
+                            Container(
+                              width: 80,
+                              padding: EdgeInsets.all(5.0),
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: Text(
+                                article['source']['name'] ?? '',
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                          ),
-                          Spacer(),
-                          Container(
-                            padding: EdgeInsets.all(5.0),
-                            decoration: BoxDecoration(
-                                color: Colors.blue,
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: Text(
-                              HeadLinesCubit.get(context).getNewDate(article) ??
-                                  '',
-                              style: TextStyle(color: Colors.white),
+                            Spacer(),
+                            Container(
+                              padding: EdgeInsets.all(5.0),
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              child: Text(
+                               HeadLinesCubit.get(context).getNewDate(article) ??
+                                    '',
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

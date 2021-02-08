@@ -1,6 +1,4 @@
 
-
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,10 +10,7 @@ import 'package:news/modules/single_category/category_cubit/category_cubit.dart'
 import 'package:news/shared/network/remote/helper.dart';
 
 void main() {
-  runApp(
-      DevicePreview(
-          enabled: !kReleaseMode,
-      builder: (context)=>MyApp()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -29,8 +24,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => DetailsCubit()),
       ],
       child: MaterialApp(
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
         home: HeadLinesScreen(),
       ),

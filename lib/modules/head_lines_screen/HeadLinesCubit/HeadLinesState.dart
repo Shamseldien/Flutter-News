@@ -4,7 +4,7 @@ class HeadLinesInitialState extends HeadLinesStates{}
 class HeadLinesLoadingState extends HeadLinesStates{}
 class HeadLinesSuccessState extends HeadLinesStates{}
 class HeadLinesErrorState extends HeadLinesStates{
-  String error;
+  var error;
   HeadLinesErrorState(this.error);
 }
 
