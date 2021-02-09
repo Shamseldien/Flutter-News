@@ -16,11 +16,12 @@ class DioHelper {
       print(error.message);
     });
   }
-  static Future<Response> getSingleCategory({@required String path,@required category}) async {
+  static Future<Response> getSingleCategory({@required String path,@required category,page}) async {
     return await dio.get(path, queryParameters: {
       'country': 'eg',
       'category':category,
       'apiKey': '2f89fcd3e0214937853f64711ef5bfb6',
+      'page':page
 
     }).catchError((error){
       print(error.message);

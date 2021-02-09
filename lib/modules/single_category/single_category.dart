@@ -2,6 +2,7 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:news/modules/details_screen/DetailsScreen.dart';
@@ -56,14 +57,27 @@ class SingleCategory extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index)=>singleCategoryItem(articles[index],context),
                         separatorBuilder: (context,index)=>Container(),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(child: Text('Load more...',style: GoogleFonts.aBeeZee(fontSize: 16,fontWeight: FontWeight.bold,letterSpacing: 2),)),
-                      ),
+                    state is! CategoryGetMoreState
+                     ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                        child: GestureDetector(
+                            onTap: (){
+                              if(cubit.status!='error')
+                                cubit.getMoreCategory(title);
+                            },
+                            child: state is! CategoryErrorState
+                            ?Text('Load more...',style: GoogleFonts.aBeeZee(fontSize: 16,fontWeight: FontWeight.bold,letterSpacing: 2),)
+                                :Container())),
+                  )
+                      : SpinKitThreeBounce(color: Colors.blue, size: 30.0,),
                     ],
                   ),
                 ),
-                fallback: (ctx)=>Center(child: CircularProgressIndicator(),),
+                fallback: (ctx)=>Center(child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircularProgressIndicator(),
+                ),),
               )
             );
           },
