@@ -9,6 +9,8 @@ class HeadLinesCubit extends Cubit<HeadLinesStates> {
   static HeadLinesCubit get(context) => BlocProvider.of(context);
 
   List articles=[] ;
+  var totalResult = 0;
+  var currentPage = 1;
 
   List categoryTitle=[
     'health',
@@ -38,8 +40,27 @@ class HeadLinesCubit extends Cubit<HeadLinesStates> {
     emit(HeadLinesLoadingState());
     DioHelper.getHeadLines(
       path: 'v2/top-headlines',
+      page: currentPage.toString()
     ).then((value) {
+     totalResult =  value.data['totalResults'];
       articles = value.data['articles'] as List;
+      emit(HeadLinesSuccessState());
+    }).catchError((e) {
+      emit(HeadLinesErrorState(e.message));
+    });
+  }
+
+
+
+  getMoreHeadLines() {
+    currentPage++;
+    emit(HeadLinesGetMoreState());
+    DioHelper.getHeadLines(
+        path: 'v2/top-headlines',
+        page: currentPage.toString()
+    ).then((value) {
+      totalResult =  value.data['totalResults'];
+      articles.addAll(value.data['articles'] as List);
       emit(HeadLinesSuccessState());
     }).catchError((e) {
       emit(HeadLinesErrorState(e.message));

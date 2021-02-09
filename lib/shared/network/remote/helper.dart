@@ -8,10 +8,11 @@ class DioHelper {
     dio = Dio(BaseOptions(baseUrl: 'https://newsapi.org/'));
   }
 
-  static Future<Response> getHeadLines({@required String path}) async {
+  static Future<Response> getHeadLines({@required String path,page}) async {
     return await dio.get(path, queryParameters: {
       'country': 'eg',
       'apiKey': '2f89fcd3e0214937853f64711ef5bfb6',
+      'page':page,
     }).catchError((error){
       print(error.message);
     });

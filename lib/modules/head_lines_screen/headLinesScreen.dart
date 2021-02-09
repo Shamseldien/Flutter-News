@@ -2,6 +2,7 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news/modules/head_lines_screen/HeadLinesCubit/HeadLinesCubit.dart';
@@ -118,8 +119,25 @@ class HeadLinesScreen extends StatelessWidget {
                         ),
                       ),
 
+
+
+
                     ],
+                  ),
+                  state is! HeadLinesGetMoreState
+                      ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                        child: GestureDetector(
+                            onTap: (){
+                              if(cubit.totalResult>list.length)
+                                cubit.getMoreHeadLines();
+                            },
+                            child: cubit.totalResult>list.length
+                                ?Text('Load more...',style: GoogleFonts.aBeeZee(fontSize: 16,fontWeight: FontWeight.bold,letterSpacing: 2),)
+                                :Container())),
                   )
+                      : SpinKitThreeBounce(color: Colors.blue, size: 30.0,),
 
                 ],
 
