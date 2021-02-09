@@ -6,21 +6,20 @@ class CategoryCubit extends Cubit<CategoryStates> {
   CategoryCubit() : super(CategoryInitialState());
 
   static CategoryCubit get(context) => BlocProvider.of(context);
-
   List category = [];
-
-  String status;
-
+  var totalResult ;
   int currentPage = 1;
-
   getCategory(category) {
     emit(CategoryLoadingState());
     DioHelper.getSingleCategory(
             path: 'v2/top-headlines',
             category: category,
-            page: currentPage.toString())
+            page: 0
+    )
         .then((value) {
       this.category = value.data['articles'] as List;
+     totalResult = value.data['totalResults'] ;
+      print(totalResult);
       emit(CategorySuccessState());
     }).catchError((error) {
       print(error.toString());
@@ -36,11 +35,7 @@ class CategoryCubit extends Cubit<CategoryStates> {
             category: category,
             page: currentPage.toString())
         .then((value) {
-      print(value.data);
-      if(value.data['status']!= 'error')
         this.category.addAll(value.data['articles'] as List);
-
-      status=value.data['status'];
       emit(CategorySuccessState());
     }).catchError((error) {
       print(error.toString());

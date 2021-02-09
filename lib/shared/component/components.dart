@@ -210,6 +210,7 @@ navigateTo({context, widget}) => Navigator.push(
 Widget allCategories({context, image, title}) => InkWell(
       onTap: () {
         navigateTo(context: context, widget: SingleCategory(title));
+        print(title);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),

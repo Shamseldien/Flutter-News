@@ -22,12 +22,12 @@ class SingleCategory extends StatelessWidget {
     );
     return  Builder(
       builder: (BuildContext context) {
-        CategoryCubit.get(context)..getCategory(title);
+        CategoryCubit.get(context).getCategory(title);
         return BlocConsumer<CategoryCubit,CategoryStates>(
           listener: (context,state){
           },
           builder: (context,state){
-            List articles = [];
+            List articles;
             var cubit = CategoryCubit.get(context);
             articles = cubit.category;
             return Scaffold(
@@ -63,13 +63,12 @@ class SingleCategory extends StatelessWidget {
                     child: Center(
                         child: GestureDetector(
                             onTap: (){
-                              if(cubit.status!='error')
+                              if(cubit.totalResult>articles.length)
                                 cubit.getMoreCategory(title);
                             },
-                            child: state is! CategoryErrorState
+                            child:cubit.totalResult>articles.length
                             ?Text('Load more...',style: GoogleFonts.aBeeZee(fontSize: 16,fontWeight: FontWeight.bold,letterSpacing: 2),)
-                                :Container())),
-                  )
+                                :Container())),)
                       : SpinKitThreeBounce(color: Colors.blue, size: 30.0,),
                     ],
                   ),
