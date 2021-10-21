@@ -1,4 +1,5 @@
-import 'package:conditional_builder/conditional_builder.dart';
+
+import 'package:conditional_builder_rec/conditional_builder_rec.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,7 +63,7 @@ class HeadLinesScreen extends StatelessWidget {
               ),
             ),
             backgroundColor: Colors.white,
-            body:state is! HeadLinesErrorState ? ConditionalBuilder(
+            body:state is! HeadLinesErrorState ? ConditionalBuilderRec(
               condition: state is! HeadLinesLoadingState,
               builder: (ctx)=>ListView(
                 scrollDirection: Axis.vertical,
